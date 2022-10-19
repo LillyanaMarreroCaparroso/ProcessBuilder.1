@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,11 +15,21 @@ public class Main {
             System.out.println("Introduce el número de procesos");
             int numBrowsers = sc.nextInt();
 
+            for (int i = 0; i < numBrowsers; i++) {
+                myProcess = pb.start();
+                browsers.add(myProcess);
+            }
 
+            for (int i = 0; i < browsers.size(); i++) {
+                Process process = browsers.get(i);
+                while (process.isAlive());
+            }
 
-        } catch () {
+            myProcess.waitFor();
 
+        } catch (IOException | InterruptedException e) {
+            System.out.println("Error");
+           e.printStackTrace();
         }
-
     }
 }
